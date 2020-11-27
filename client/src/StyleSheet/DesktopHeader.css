@@ -1,0 +1,102 @@
+.DesktopHeader {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.DesktopHeader__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  border-bottom: 1px solid lightgray;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+
+.top__left {
+  display: flex;
+  align-items: center;
+}
+
+.leftTop__text {
+  margin-left: 0.5em;
+  font-weight: 500;
+}
+
+.top__right {
+  display: flex;
+  align-items: center;
+}
+
+.topRight__icon {
+  margin-right: 0.5em;
+}
+
+.topRight__text {
+  font-weight: 500;
+}
+
+.DesktopHeader__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+
+.bottom__left {
+  display: flex;
+  align-items: center;
+}
+
+.leftBottom__brandName {
+  font-size: 1.5rem;
+}
+
+.left__clothCategories {
+  display: flex;
+  margin-left: 1.5em;
+  align-items: center;
+}
+
+.leftBottom__category {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.category-jean,
+.category-sneaker {
+  margin-left: 1em;
+}
+
+.category-jean:hover,
+.category-sneaker:hover,
+.category-hoodie:hover {
+  border-bottom: 1px solid black;
+}
+
+.bottom__right {
+  display: flex;
+  align-items: center;
+}
+
+.right__searchIcon {
+  margin-right: 1em;
+  border-right: 1px solid lightgray;
+}
+
+.search-icon {
+  margin-right: 1em;
+}
+
+.person-icon,
+.favourite-icon {
+  margin-right: 0.5em;
+}
+
+.right__icons {
+  cursor: pointer;
+}
+
+.right__icons:hover {
+  color: lightgray;
+}
