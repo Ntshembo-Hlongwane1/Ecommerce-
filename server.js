@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import expressSession from "express-session";
 import MongoStore from "connect-mongodb-session";
+import AuthRoute from "./Routes/Auth/AuthRoute";
 dotenv.config();
 
 const app = express();
@@ -54,6 +55,9 @@ mongoose.connect(mongoURI, mongoDB__connectionOptions, (error) => {
   }
   console.log("Connection to MongoDB was successful");
 });
+
+//==================================================Server Endpoints====================================================
+app.use(AuthRoute);
 
 //=================================================Server Configs & Connection==========================================
 const PORT = process.env.PORT || 5000;
