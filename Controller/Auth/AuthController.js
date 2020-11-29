@@ -23,7 +23,7 @@ class AuthController {
           return response.status(400).json({ msg: "All fields are required" });
         }
 
-        if (password.trim() < 6) {
+        if (password.trim().length < 6) {
           return response.status(400).json({
             msg: "Password length must be at least 6 characters long",
           });
@@ -42,10 +42,10 @@ class AuthController {
         }
 
         const salt = await Bcrypt.genSalt(15);
-        const hashedPassword = await Bcrypt.hash(password, salt);
+        const hashedPassword = await Bcrypt.hash(password.trim(), salt);
 
         const newUser = new userModel({
-          email: email,
+          email: email.trim(),
           password: hashedPassword,
         });
 
@@ -75,7 +75,7 @@ class AuthController {
         const { email, password } = fields;
 
         if (!email || !password) {
-          return response.status(500).json({ msg: "All fields are required" });
+          return response.status(400).json({ msg: "All fields are required" });
         }
 
         const existingUser = await userModel.findOne({ email: email });
@@ -138,15 +138,15 @@ class AuthController {
       if (!isUserSessionExisting) {
         const user_role = isUserSessionExisting.user.isAdmin;
         return response.status(200).json({
-          authenticated: false,
-          admin: user_role,
+          auth_status: false,
+          role_status: user_role,
         });
       }
 
       const user_role = isUserSessionExisting.user.isAdmin;
       return response.status(200).json({
-        authenticated: true,
-        admin: user_role,
+        auth_status: true,
+        role_status: user_role,
       });
     } catch (error) {
       return response
