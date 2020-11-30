@@ -135,3 +135,23 @@
 .sideBar-menuText {
   color: white;
 }
+
+.DashBoardMenu__home,
+.DashBoardMenu__orders,
+.DashBoardMenu__inventory {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 2em;
+  cursor: pointer;
+}
+
+.DashBoardMenu__home:hover,
+.DashBoardMenu__orders:hover,
+.DashBoardMenu__inventory:hover {
+  background-color: #0a79df;
+  border-radius: 999px;
+}
+
+.DashBoardMenu__text {
+  margin-left: 0.8em;
+}

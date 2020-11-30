@@ -7,7 +7,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import "../../StyleSheet/DesktopHeader.css";
 import { useSelector } from "react-redux";
-import { Sidebar, InputItem, Item } from "react-sidebar-ui";
+import { Sidebar } from "react-sidebar-ui";
 import "react-sidebar-ui/dist/index.css";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -20,12 +20,15 @@ import { store } from "react-notifications-component";
 import "animate.css";
 import "react-notifications-component/dist/theme.css";
 import { Link, useHistory } from "react-router-dom";
+import StorefrontIcon from "@material-ui/icons/Storefront";
+import TurnedInIcon from "@material-ui/icons/TurnedIn";
 
 const DesktopHeader = () => {
   const [isScrolling, setScrolling] = useState(false);
   const { authStatus } = useSelector((state) => state.userAuthStatus);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isDashMenuOpenend, setIsDashMenuOpened] = useState(false);
   const history = useHistory();
   const top = 0;
   useEffect(() => {
@@ -160,9 +163,33 @@ const DesktopHeader = () => {
                   </Link>
                 )}
                 {authStatus && authStatus.role_status ? (
-                  <div className="UserRole__status" onClick={OpenMenu}>
+                  <div
+                    className="UserRole__status"
+                    onClick={() => setIsDashMenuOpened(!isDashMenuOpenend)}
+                  >
                     <DashboardIcon />
                     <h4 className="Menu__text">Dashboard</h4>
+                  </div>
+                ) : null}
+                {isDashMenuOpenend ? (
+                  <div className="DashBoardMenu">
+                    <Link
+                      to="/admin-dashboard"
+                      className="Router__link sideBar-menuText"
+                    >
+                      <div className="DashBoardMenu__home">
+                        <HomeIcon />
+                        <h4 className="DashBoardMenu__text">Dashboard Home</h4>
+                      </div>
+                    </Link>
+                    <div className="DashBoardMenu__orders">
+                      <TurnedInIcon />
+                      <h4 className="DashBoardMenu__text">Orders</h4>
+                    </div>
+                    <div className="DashBoardMenu__inventory">
+                      <StorefrontIcon />
+                      <h4 className="DashBoardMenu__text">Inventory</h4>
+                    </div>
                   </div>
                 ) : null}
                 <input
