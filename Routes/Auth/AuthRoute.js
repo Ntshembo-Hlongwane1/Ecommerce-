@@ -12,7 +12,7 @@ router.post("/api/user-signin", (request, response) => {
   AuthController.SignIn(request, response);
 });
 
-router.post("/api/user-logout", (request, response) => {
+router.get("/api/user-logout", (request, response) => {
   AuthController.LogOut(request, response);
 });
 

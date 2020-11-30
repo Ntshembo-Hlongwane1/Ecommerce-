@@ -100,3 +100,38 @@
 .right__icons:hover {
   color: lightgray;
 }
+
+.Home__menuItem,
+.Auth__statusItem,
+.UserRole__status {
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+  cursor: pointer;
+  padding: 0.5em 1em;
+}
+
+.Home__menuItem:hover,
+.Auth__statusItem:hover,
+.UserRole__status:hover {
+  background-color: #0a79df;
+  border-radius: 999px;
+}
+
+.SearchField {
+  width: 100%;
+  border-radius: 999px;
+}
+
+.ClosingButton {
+  float: right;
+  cursor: pointer;
+}
+
+.Menu__text {
+  margin-left: 0.8em;
+}
+
+.sideBar-menuText {
+  color: white;
+}

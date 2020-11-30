@@ -110,7 +110,7 @@ class AuthController {
           isAdmin: existingUser.isAdmin,
         };
 
-        return response.status(200).send(request.sessionID);
+        return response.status(200).send(request.session);
       });
     } catch (error) {
       return response.status(500, { msg: "Server Error: Failed to Signin" });
@@ -144,6 +144,7 @@ class AuthController {
       }
 
       const user_role = isUserSessionExisting.user.isAdmin;
+
       return response.status(200).json({
         auth_status: true,
         role_status: user_role,
@@ -151,7 +152,7 @@ class AuthController {
     } catch (error) {
       return response
         .status(500)
-        .json({ msg: "Server Error: Failed to create account" });
+        .json({ msg: "Server Error: Failed to check auth status" });
     }
   }
 }

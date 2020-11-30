@@ -5,25 +5,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SignUp from "./Components/SignUp";
 import Header from "./Components/Header/Header";
 import SignIn from "./Components/SignIn";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import AuthStatusCheck from "./store/Actions/auth_status_check/AuthStatusCheck";
 
 const App = () => {
-  const [auth_status, setAuthStatus] = useState(false);
-  const [role_status, setRoleStatus] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const url = "http://localhost:5000/api/check-isUserLoggedin";
-
-    axios
-      .get(url, { withCredentials: true })
-      .then((response) => {
-        setAuthStatus(response.data.auth_status);
-        setRoleStatus(response.data.role_status);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  });
+    dispatch(AuthStatusCheck());
+  }, []);
 
   return (
     <Router className="App">

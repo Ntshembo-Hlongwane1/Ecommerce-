@@ -69,7 +69,8 @@ export default function SignIn() {
             showIcon: true,
           },
           onRemoval: () => {
-            history.push("/user-signin");
+            history.push("/");
+            window.location.reload(false);
           },
         });
 
@@ -140,9 +141,13 @@ export default function SignIn() {
 
       const { status, data } = response;
 
-      responseNotification(status, data.msg);
+      if (status === 201) {
+        responseNotification(status, data.msg);
+      } else {
+        history.push("/");
+      }
     } catch (error) {
-      const { data, status } = error.response || { data: null, status: "500" };
+      const { data, status } = error.response;
       responseNotification(status, data.msg);
     }
   };
