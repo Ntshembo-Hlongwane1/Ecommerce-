@@ -132,24 +132,26 @@ class AuthController {
   }
 
   isUserLoggedIn(request, response) {
-    const isUserSessionExisting = request.session || false;
+    const isUserSessionExisting = request.session.user || false;
 
     try {
       if (!isUserSessionExisting) {
-        const user_role = isUserSessionExisting.user.isAdmin;
         return response.status(200).json({
           auth_status: false,
-          role_status: user_role,
+          role_status: false,
         });
       }
 
-      const user_role = isUserSessionExisting.user.isAdmin;
+      const user_role = isUserSessionExisting.isAdmin
+        ? isUserSessionExisting.isAdmin
+        : false;
 
       return response.status(200).json({
         auth_status: true,
         role_status: user_role,
       });
     } catch (error) {
+      console.error(error);
       return response
         .status(500)
         .json({ msg: "Server Error: Failed to check auth status" });
