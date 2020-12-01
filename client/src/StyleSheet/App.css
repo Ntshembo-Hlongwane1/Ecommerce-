@@ -14,3 +14,16 @@
   z-index: 999;
   position: sticky;
 }
+
+.password__field {
+  display: flex;
+  align-items: center;
+}
+
+.Material-TextField {
+  flex: 1;
+}
+
+.passwordVisibilty__toggler {
+  margin-left: 0.8em;
+}

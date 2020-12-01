@@ -15,6 +15,8 @@ import ReactNotifications from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "animate.css";
 import "react-notifications-component/dist/theme.css";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function Copyright() {
   return (
@@ -52,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
   const responseNotification = (statusCode, response) => {
     switch (statusCode) {
@@ -181,19 +184,33 @@ export default function SignIn() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="password__field">
+            <TextField
+              className="Material-TextField"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type={`${showPassword ? "text" : "password"}`}
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {showPassword ? (
+              <VisibilityIcon
+                onClick={() => setShowPassword(!showPassword)}
+                className="passwordVisibilty__toggler"
+              />
+            ) : (
+              <VisibilityOffIcon
+                className="passwordVisibilty__toggler"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+          </div>
 
           <Button
             type="submit"

@@ -15,6 +15,8 @@ import ReactNotifications from "react-notifications-component";
 import { store } from "react-notifications-component";
 import "animate.css";
 import "react-notifications-component/dist/theme.css";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function Copyright() {
   return (
@@ -53,6 +55,8 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifiedPassword, setVerifiedPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmedPassword, setShowConfirmedPassword] = useState(false);
   const history = useHistory();
 
   const responseNotification = (statusCode, response) => {
@@ -156,33 +160,61 @@ export default function SignUp() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Confirm Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={verifiedPassword}
-            onChange={(e) => setVerifiedPassword(e.target.value)}
-          />
+          <div className="password__field">
+            <TextField
+              className="Material-TextField"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type={`${showPassword ? "text" : "password"}`}
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {showPassword ? (
+              <VisibilityIcon
+                onClick={() => setShowPassword(!showPassword)}
+                className="passwordVisibilty__toggler"
+              />
+            ) : (
+              <VisibilityOffIcon
+                className="passwordVisibilty__toggler"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+          </div>
 
+          <div className="password__field">
+            <TextField
+              className="Material-TextField"
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Confirm Password"
+              type={`${showConfirmedPassword ? "text" : "password"}`}
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setVerifiedPassword(e.target.value)}
+            />
+            {showConfirmedPassword ? (
+              <VisibilityIcon
+                onClick={() => setShowConfirmedPassword(!showConfirmedPassword)}
+                className="passwordVisibilty__toggler"
+              />
+            ) : (
+              <VisibilityOffIcon
+                className="passwordVisibilty__toggler"
+                onClick={() => setShowConfirmedPassword(!showConfirmedPassword)}
+              />
+            )}
+          </div>
           <Button
             type="submit"
             fullWidth
