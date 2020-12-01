@@ -128,8 +128,14 @@ const DesktopHeader = () => {
             <Link to="/products-hoodies" className="Router__link">
               <h4 className="leftBottom__category category-hoodie">Hoodies</h4>
             </Link>
-            <h4 className="leftBottom__category category-jean">Jeans</h4>
-            <h4 className="leftBottom__category category-sneaker">Sneakers</h4>
+            <Link to="/products-jeans" className="Router__link">
+              <h4 className="leftBottom__category category-jean">Jeans</h4>
+            </Link>
+            <Link to="/products-sneakers" className="Router__link">
+              <h4 className="leftBottom__category category-sneaker">
+                Sneakers
+              </h4>
+            </Link>
           </div>
         </div>
         <div className="bottom__right">

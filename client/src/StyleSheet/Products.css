@@ -1,0 +1,39 @@
+.Products__details {
+  margin-top: 5em;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1em 2em;
+  justify-content: flex-start;
+}
+
+.details {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-bottom: 2em;
+  padding: 0.6em;
+  transition: transform 0.4s;
+  margin-left: 1.5em;
+}
+
+.details:hover {
+  transform: scale(1.1);
+}
+
+.wishlist__icon {
+  vertical-align: top;
+}
+
+.wishlist__icon:hover {
+  color: #e71c23;
+}
+
+.details__name > h4 {
+  font-weight: 300;
+  margin-bottom: 0.3em;
+}
+
+.Loading__screen {
+  display: block;
+  margin: 0% auto;
+}
