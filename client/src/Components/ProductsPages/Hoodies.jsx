@@ -20,7 +20,11 @@ const Hoodies = () => {
   return (
     <div className="Products">
       {loading ? (
-        <img src={ScreenLoader} alt={`Fetching All ${category}`} />
+        <img
+          src={ScreenLoader}
+          alt={`Fetching All ${category}`}
+          className="Loading__screen"
+        />
       ) : error ? (
         <h1>Network Error Please try again later :(</h1>
       ) : (

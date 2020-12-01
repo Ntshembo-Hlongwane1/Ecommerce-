@@ -32,3 +32,8 @@
   font-weight: 300;
   margin-bottom: 0.3em;
 }
+
+.Loading__screen {
+  display: block;
+  margin: 0% auto;
+}

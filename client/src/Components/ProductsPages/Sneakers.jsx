@@ -20,7 +20,11 @@ const Sneakers = () => {
   return (
     <div className="Products">
       {loading ? (
-        <img src={ScreenLoader} alt={`Fetching All ${category}`} />
+        <img
+          src={ScreenLoader}
+          alt={`Fetching All ${category}`}
+          className="Loading__screen"
+        />
       ) : error ? (
         <h1>Network Error Please try again later :(</h1>
       ) : (
@@ -30,7 +34,11 @@ const Sneakers = () => {
               return (
                 <div className="details" key={product._id}>
                   <div className="details__img">
-                    <img src={product.picture} alt="" />
+                    <img
+                      src={product.picture}
+                      alt=""
+                      className="Loading__screen"
+                    />
                     <FavoriteBorderIcon className="wishlist__icon" />
                   </div>
                   <div className="details__name">
