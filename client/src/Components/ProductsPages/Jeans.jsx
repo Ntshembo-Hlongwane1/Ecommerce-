@@ -5,7 +5,7 @@ import ScreenLoader from "../../images/screenLoader.gif";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import "../../StyleSheet/Products.css";
 
-const Hoodies = () => {
+const Jeans = () => {
   const productCategory = window.location.href.split("-")[1]; //First Letter lowercased
   const category =
     productCategory.charAt(0).toUpperCase() + productCategory.slice(1); // Uppercasing First Letter
@@ -49,4 +49,4 @@ const Hoodies = () => {
   );
 };
 
-export default Hoodies;
+export default Jeans;

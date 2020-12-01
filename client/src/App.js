@@ -10,6 +10,8 @@ import AuthStatusCheck from "./store/Actions/auth_status_check/AuthStatusCheck";
 import DashBoard from "./Components/AdminDashBoard/DashBoard";
 import AddNewProductsForm from "./Components/AdminDashBoard/AddNewProductsForm";
 import Hoodies from "./Components/ProductsPages/Hoodies";
+import Sneakers from "./Components/ProductsPages/Sneakers";
+import Jeans from "./Components/ProductsPages/Jeans";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +27,14 @@ const App = () => {
         <Route path="/products-hoodies">
           <Header />
           <Hoodies />
+        </Route>
+        <Route path="/products-sneakers">
+          <Header />
+          <Sneakers />
+        </Route>
+        <Route path="/products-jeans">
+          <Header />
+          <Jeans />
         </Route>
         <Route path="/admin-dashboard" exact={true}>
           <Header />
