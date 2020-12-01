@@ -8,4 +8,8 @@ router.post("/api/add-new-product", (request, response) => {
   ProductsController.AddNewProduct(request, response);
 });
 
+router.get("/api/fetch-products/:category", (request, response) => {
+  ProductsController.FetchProductList(request, response);
+});
+
 export default router;

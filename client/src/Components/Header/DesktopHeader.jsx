@@ -120,10 +120,14 @@ const DesktopHeader = () => {
       <div className="DesktopHeader__bottom">
         <div className="bottom__left">
           <div className="left__brandName">
-            <h3 className="leftBottom__brandName">Hlongwane Botique</h3>
+            <Link to="/" className="Router__link">
+              <h3 className="leftBottom__brandName">Hlongwane Botique</h3>
+            </Link>
           </div>
           <div className="left__clothCategories">
-            <h4 className="leftBottom__category category-hoodie">Hoodies</h4>
+            <Link to="/products-hoodies" className="Router__link">
+              <h4 className="leftBottom__category category-hoodie">Hoodies</h4>
+            </Link>
             <h4 className="leftBottom__category category-jean">Jeans</h4>
             <h4 className="leftBottom__category category-sneaker">Sneakers</h4>
           </div>

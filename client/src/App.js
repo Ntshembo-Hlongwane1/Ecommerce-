@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import AuthStatusCheck from "./store/Actions/auth_status_check/AuthStatusCheck";
 import DashBoard from "./Components/AdminDashBoard/DashBoard";
 import AddNewProductsForm from "./Components/AdminDashBoard/AddNewProductsForm";
+import Hoodies from "./Components/ProductsPages/Hoodies";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const App = () => {
   return (
     <Router className="App">
       <Switch>
+        <Route path="/products-hoodies">
+          <Header />
+          <Hoodies />
+        </Route>
         <Route path="/admin-dashboard" exact={true}>
           <Header />
           <DashBoard />

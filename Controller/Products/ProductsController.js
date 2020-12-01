@@ -70,6 +70,20 @@ class ProductsController {
       return response.status(500, { msg: "Error: Failed to add new product" });
     }
   }
+
+  async FetchProductList(request, response) {
+    const category = request.params.category;
+
+    try {
+      const data = await productModel.find({ category: category });
+
+      return response.status(200).json(data);
+    } catch (error) {
+      return response.status(500).json({
+        msg: `Network Error: Failed to get ${category} try again later`,
+      });
+    }
+  }
 }
 
 export default ProductsController;
