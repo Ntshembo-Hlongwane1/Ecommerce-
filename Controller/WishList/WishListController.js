@@ -19,6 +19,7 @@ db.once("open", () => {
   const changeStream = wishListCollection.watch();
 
   changeStream.on("change", (change) => {
+    console.log(change);
     if (change.operationType === "insert") {
       pusher.trigger("wishlistInsertion", "insert", {
         insertion: true,
@@ -132,7 +133,13 @@ class WishListController {
           (item) => item.productID !== productID
         );
 
-        console.log(userWishList);
+        const updateDoc = await wishModel.findOneAndUpdate(
+          { owner: userEmail },
+          userWishList,
+          { new: true }
+        );
+
+        return response.status(200).json({ msg: "Item successfully removed" });
       });
     } catch (error) {
       return response
