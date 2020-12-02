@@ -1,5 +1,35 @@
 import Formidable from "formidable";
 import wishModel from "../../Models/Wishlist/Wishlist";
+import mongoose from "mongoose";
+import Pusher from "pusher";
+import dotenv from "dotenv";
+dotenv.config();
+const db = mongoose.connection;
+
+const pusher = new Pusher({
+  appId: process.env.pusher_appID,
+  key: process.env.pusher_key,
+  secret: process.env.pusher_secret,
+  cluster: process.env.pusher_cluster,
+  useTLS: process.env.pusher_TlsConnection,
+});
+
+db.once("open", () => {
+  const wishListCollection = db.collection("wishlists");
+  const changeStream = wishListCollection.watch();
+
+  changeStream.on("change", (change) => {
+    if (change.operationType === "insert") {
+      pusher.trigger("wishlistInsertion", "insert", {
+        insertion: true,
+      });
+    } else if (change.operationType === "update") {
+      pusher.trigger("wishlistUpdate", "update", {
+        update: true,
+      });
+    }
+  });
+});
 
 class WishListController {
   AddItem(request, response) {

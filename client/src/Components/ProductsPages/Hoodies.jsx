@@ -5,6 +5,7 @@ import ScreenLoader from "../../images/screenLoader.gif";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import "../../StyleSheet/Products.css";
 import axios from "axios";
+import Pusher from "pusher-js";
 
 const Hoodies = () => {
   const productCategory = window.location.href.split("-")[1]; //First Letter lowercased
@@ -42,8 +43,31 @@ const Hoodies = () => {
   };
 
   useEffect(() => {
-    dispatch(ProductListFetch(category));
+    const pusher = new Pusher(process.env.REACT_APP_PusherKey, {
+      cluster: process.env.REACT_APP_PusherCluster,
+    });
+
+    const channel = pusher.subscribe("wishlistInsertion");
+    channel.bind("insert", (data) => {
+      localStorage.setItem("notify", true);
+      window.location.reload(false);
+    });
+    const channel2 = pusher.subscribe("wishlistUpdate");
+    channel2.bind("update", (data) => {
+      localStorage.setItem("notify", true);
+      window.location.reload(false);
+    });
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+      channel2.unbind_all();
+      channel2.unsubscribe();
+    };
   }, []);
+
+  useEffect(() => {
+    dispatch(ProductListFetch(category));
+  }, [dispatch, category]);
   return (
     <div className="Products">
       {loading ? (

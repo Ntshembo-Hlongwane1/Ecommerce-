@@ -32,6 +32,7 @@ const DesktopHeader = () => {
   const [isDashMenuOpenend, setIsDashMenuOpened] = useState(false);
   const history = useHistory();
   const top = 0;
+  const notifyState = localStorage.getItem("notify") || false;
   useEffect(() => {
     window.addEventListener("scroll", () => {
       let scroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -90,6 +91,7 @@ const DesktopHeader = () => {
         break;
     }
   };
+
   const LogOut = async () => {
     const url = "http://localhost:5000/api/user-logout";
     setIsOpen(!isOpen);
@@ -102,6 +104,11 @@ const DesktopHeader = () => {
       const { data, status } = error.response;
       responseNotification(status, data.msg);
     }
+  };
+
+  const removeNotification = () => {
+    localStorage.removeItem("notify");
+    window.location.reload(false);
   };
 
   return (
@@ -212,7 +219,13 @@ const DesktopHeader = () => {
             ) : null}
           </div>
           <div className="right__favouriteIcon">
-            <FavoriteBorderIcon className="right__icons favourite-icon" />
+            <FavoriteBorderIcon
+              className="right__icons favourite-icon"
+              onClick={removeNotification}
+            />
+            {notifyState ? (
+              <FiberManualRecordIcon className="notification-icon" />
+            ) : null}
           </div>
           <div className="right__cartIcon">
             <ShoppingCartIcon className="right__icons cart-icon" />
