@@ -22,15 +22,15 @@ class WishListController {
         }
 
         const userSession = request.session.user || false;
-        const username = userSession.username;
+        const userEmail = userSession.userMail;
 
         const existingUserWishList = await wishModel.findOne({
-          owner: username,
+          owner: userEmail,
         });
 
         if (!existingUserWishList) {
           const newWishList = new wishModel({
-            owner: username,
+            owner: userEmail,
             wishlist: {
               productID,
               productName,
@@ -59,12 +59,12 @@ class WishListController {
         };
 
         existingUserWishList.wishlist = [
-          ...existingUserWishList.wishlist,
           newItem,
+          ...existingUserWishList.wishlist,
         ];
 
         const updatedDoc = await wishModel.findOneAndUpdate(
-          { owner: username },
+          { owner: userEmail },
           existingUserWishList,
           { new: true }
         );

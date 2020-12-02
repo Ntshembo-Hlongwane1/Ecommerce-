@@ -22,6 +22,7 @@ import "react-notifications-component/dist/theme.css";
 import { Link, useHistory } from "react-router-dom";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 
 const DesktopHeader = () => {
   const [isScrolling, setScrolling] = useState(false);
