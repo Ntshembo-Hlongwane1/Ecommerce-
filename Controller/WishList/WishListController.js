@@ -103,7 +103,60 @@ class WishListController {
     } catch (error) {
       return response
         .status(500)
-        .json({ msg: "Network Error: Failed to item to wish list" });
+        .json({ msg: "Network Error: Failed to add item to wish list" });
+    }
+  }
+
+  RemoveItem(request, response) {
+    const form = new Formidable.IncomingForm();
+
+    try {
+      form.parse(request, async (error, fields, files) => {
+        if (error) {
+          return response.status(500).json({
+            msg: "Network Error: Failed to remove item from wishlist",
+          });
+        }
+
+        const { productID } = fields;
+        const userSession = request.session.user || false;
+        const userEmail = userSession.userMail;
+
+        const userWishList = await wishModel.findOne({ owner: userEmail });
+
+        if (!userWishList) {
+          return response.status(400).json({ msg: "Wishlist not existent" });
+        }
+
+        userWishList.wishlist = userWishList.wishlist.filter(
+          (item) => item.productID !== productID
+        );
+
+        console.log(userWishList);
+      });
+    } catch (error) {
+      return response
+        .status(500)
+        .json({ msg: "Network Error: Failed to remove item from wish list" });
+    }
+  }
+
+  async GetWishList(request, response) {
+    try {
+      const userSession = request.session.user || false;
+      const userEmail = userSession.userMail;
+
+      const wishlist = await wishModel.findOne({ owner: userEmail });
+
+      if (!wishlist) {
+        return response.status(404).json({ msg: "Wish List Empty" });
+      }
+
+      return response.status(200).json(wishlist);
+    } catch (error) {
+      return response.status(500, {
+        msg: "Network Error: Failed to get your wishlist try again later",
+      });
     }
   }
 }

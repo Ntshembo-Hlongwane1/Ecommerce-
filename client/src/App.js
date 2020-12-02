@@ -12,6 +12,7 @@ import AddNewProductsForm from "./Components/AdminDashBoard/AddNewProductsForm";
 import Hoodies from "./Components/ProductsPages/Hoodies";
 import Sneakers from "./Components/ProductsPages/Sneakers";
 import Jeans from "./Components/ProductsPages/Jeans";
+import WishList from "./Components/WishList";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,10 @@ const App = () => {
         <Route path="/products-hoodies">
           <Header />
           <Hoodies />
+        </Route>
+        <Route path="/wishlist">
+          <Header />
+          <WishList />
         </Route>
         <Route path="/products-sneakers">
           <Header />

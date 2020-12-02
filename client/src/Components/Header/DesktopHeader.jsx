@@ -109,6 +109,7 @@ const DesktopHeader = () => {
   const removeNotification = () => {
     localStorage.removeItem("notify");
     window.location.reload(false);
+    history.push("/wishlist");
   };
 
   return (
