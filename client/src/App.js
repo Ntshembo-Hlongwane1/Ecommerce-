@@ -29,6 +29,10 @@ const App = () => {
           <Header />
           <Hoodies />
         </Route>
+        <Route path="/product-details/:category/:id">
+          <Header />
+          <h1>PRODUCT DETAIL</h1>
+        </Route>
         <Route path="/wishlist">
           <Header />
           <WishList />

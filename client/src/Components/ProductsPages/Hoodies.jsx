@@ -6,6 +6,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import "../../StyleSheet/Products.css";
 import axios from "axios";
 import Pusher from "pusher-js";
+import { Link } from "react-router-dom";
 
 const Hoodies = () => {
   const productCategory = window.location.href.split("-")[1]; //First Letter lowercased
@@ -77,7 +78,9 @@ const Hoodies = () => {
           className="Loading__screen"
         />
       ) : error ? (
-        <h1>Network Error Please try again later :(</h1>
+        <h1 className="Error__message">
+          Network Error Please try again later :(
+        </h1>
       ) : (
         productList && (
           <div className="Products__details">
@@ -85,7 +88,12 @@ const Hoodies = () => {
               return (
                 <div className="details" key={product._id}>
                   <div className="details__img">
-                    <img src={product.picture} alt="" />
+                    <Link
+                      to={`/product-details/${category}/${product._id}`}
+                      className="Router__link"
+                    >
+                      <img src={product.picture} alt="Product" />
+                    </Link>
                     <FavoriteBorderIcon
                       className="wishlist__icon"
                       onClick={() =>
