@@ -12,4 +12,8 @@ router.get("/api/fetch-products/:category", (request, response) => {
   ProductsController.FetchProductList(request, response);
 });
 
+router.get("/api/fetch-product-details/:category/:id", (request, response) => {
+  ProductsController.GetProductDetails(request, response);
+});
+
 export default router;

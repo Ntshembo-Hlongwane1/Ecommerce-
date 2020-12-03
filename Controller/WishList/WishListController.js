@@ -19,7 +19,6 @@ db.once("open", () => {
   const changeStream = wishListCollection.watch();
 
   changeStream.on("change", (change) => {
-    console.log(change);
     if (change.operationType === "insert") {
       pusher.trigger("wishlistInsertion", "insert", {
         insertion: true,

@@ -13,6 +13,7 @@ import Hoodies from "./Components/ProductsPages/Hoodies";
 import Sneakers from "./Components/ProductsPages/Sneakers";
 import Jeans from "./Components/ProductsPages/Jeans";
 import WishList from "./Components/WishList";
+import ProductDetails from "./Components/ProductDetails";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const App = () => {
         </Route>
         <Route path="/product-details/:category/:id">
           <Header />
-          <h1>PRODUCT DETAIL</h1>
+          <ProductDetails />
         </Route>
         <Route path="/wishlist">
           <Header />

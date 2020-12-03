@@ -84,6 +84,23 @@ class ProductsController {
       });
     }
   }
+
+  async GetProductDetails(request, response) {
+    const category = request.params.category;
+    const productID = request.params.id;
+
+    try {
+      const data = await productModel.findOne({
+        category: category,
+        _id: productID,
+      });
+      return response.status(200).json(data);
+    } catch (error) {
+      return response.status(500, {
+        msg: "Network Error: Failed to retrive product details",
+      });
+    }
+  }
 }
 
 export default ProductsController;
