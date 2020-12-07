@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./StyleSheet/App.css";
 import Home from "./Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,11 +17,10 @@ import ProductDetails from "./Components/ProductDetails";
 
 const App = () => {
   const dispatch = useDispatch();
-  const [mounted, setMouted] = useState(true);
 
   useEffect(() => {
     dispatch(AuthStatusCheck());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router className="App">
