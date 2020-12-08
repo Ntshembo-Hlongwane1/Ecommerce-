@@ -25,6 +25,7 @@ const Jeans = () => {
     imageURL
   ) => {
     const url = "http://localhost:5000/api/add-wishlist-item";
+    const production__url = "/api/add-wishlist-item";
 
     const form_data = new FormData();
     form_data.append("imageURL", imageURL);
@@ -33,7 +34,7 @@ const Jeans = () => {
     form_data.append("productID", productID);
 
     try {
-      const response = await axios.post(url, form_data, {
+      const response = await axios.post(production__url, form_data, {
         withCredentials: true,
       });
 

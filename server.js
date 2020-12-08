@@ -8,14 +8,20 @@ import AuthRoute from "./Routes/Auth/AuthRoute";
 import ProductRoute from "./Routes/Products/Products";
 import WishhListRoute from "./Routes/WishList/WishList";
 import CartRoute from "./Routes/Cart/Cart";
+import path from "path";
 dotenv.config();
 
 const app = express();
 
+const origin = {
+  dev: "http://localhost:3000",
+  prod: "https://hlongwane-botique.herokuapp.com",
+};
+
 //======================================================Middlewares=====================================================
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://192.168.1.96:3000"],
+    origin: process.env.NODE_ENV === "production" ? origin.prod : origin.dev,
     credentials: true,
   })
 );
@@ -59,6 +65,16 @@ mongoose.connect(mongoURI, mongoDB__connectionOptions, (error) => {
   console.log("Connection to MongoDB was successful");
 });
 
+//===================================================Production Configs=================================================
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (request, response) => {
+    response.sendFile(
+      path.resolve(__dirname, "./client", "build", "index.html")
+    );
+  });
+}
 //==================================================Server Endpoints====================================================
 app.use(AuthRoute);
 app.use(ProductRoute);

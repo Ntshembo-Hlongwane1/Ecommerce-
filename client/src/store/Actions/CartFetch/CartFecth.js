@@ -7,9 +7,10 @@ import axios from "axios";
 
 const cartFetch = () => async (dispatch) => {
   const url = "http://localhost:5000/api/get-cart";
+  const production_url = "/api/get-cart";
   try {
     dispatch({ type: CART_FETCH_REQUEST });
-    const { data } = await axios.get(url, { withCredentials: true });
+    const { data } = await axios.get(production_url, { withCredentials: true });
 
     dispatch({ type: CART_FETCH_SUCCESS, payload: data.cart });
   } catch (error) {

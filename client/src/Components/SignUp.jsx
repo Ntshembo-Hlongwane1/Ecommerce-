@@ -118,6 +118,7 @@ export default function SignUp() {
     e.preventDefault();
 
     const url = "http://localhost:5000/api/user-signup";
+    const production_url = "http://localhost:5000/api/user-signup";
 
     const form_data = new FormData();
     form_data.append("email", email);
@@ -125,7 +126,7 @@ export default function SignUp() {
     form_data.append("verifiedPassword", verifiedPassword);
 
     try {
-      const response = await axios.post(url, form_data, {
+      const response = await axios.post(production_url, form_data, {
         withCredentials: true,
       });
       const { data, status } = response;

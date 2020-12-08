@@ -7,9 +7,10 @@ import {
 
 const AuthStatusCheck = () => async (dispatch) => {
   const url = "http://localhost:5000/api/check-isUserLoggedin";
+  const production_url = "/api/check-isUserLoggedin";
   try {
     dispatch({ type: AUTH_STATUS_FETCH_REQUEST });
-    const { data } = await axios.get(url, { withCredentials: true });
+    const { data } = await axios.get(production_url, { withCredentials: true });
     console.log(data);
     dispatch({ type: AUTH_STATUS_FETCH_SUCCESS, payload: data });
   } catch (error) {

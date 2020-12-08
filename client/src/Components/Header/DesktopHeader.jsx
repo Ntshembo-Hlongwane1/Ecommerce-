@@ -100,10 +100,13 @@ const DesktopHeader = () => {
 
   const LogOut = async () => {
     const url = "http://localhost:5000/api/user-logout";
+    const production__url = "http://localhost:5000/api/user-logout";
     setIsOpen(!isOpen);
 
     try {
-      const response = await axios.get(url, { withCredentials: true });
+      const response = await axios.get(production__url, {
+        withCredentials: true,
+      });
       const { data, status } = response;
       responseNotification(status, data.msg);
     } catch (error) {
