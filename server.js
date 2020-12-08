@@ -7,6 +7,7 @@ import MongoStore from "connect-mongodb-session";
 import AuthRoute from "./Routes/Auth/AuthRoute";
 import ProductRoute from "./Routes/Products/Products";
 import WishhListRoute from "./Routes/WishList/WishList";
+import CartRoute from "./Routes/Cart/Cart";
 dotenv.config();
 
 const app = express();
@@ -62,6 +63,7 @@ mongoose.connect(mongoURI, mongoDB__connectionOptions, (error) => {
 app.use(AuthRoute);
 app.use(ProductRoute);
 app.use(WishhListRoute);
+app.use(CartRoute);
 //=================================================Server Configs & Connection==========================================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

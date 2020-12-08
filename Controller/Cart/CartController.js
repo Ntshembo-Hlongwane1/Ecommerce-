@@ -6,7 +6,7 @@ class CartController {
     const form = new Formidable.IncomingForm();
 
     try {
-      form.parse(request, (error, fields, files) => {
+      form.parse(request, async (error, fields, files) => {
         if (error) {
           return response.status(500).json({
             msg: "Network Error: Failed to add item to cart try again later",
@@ -32,6 +32,66 @@ class CartController {
             .status(400)
             .json({ msg: "Product missing details, cannot be added to cart" });
         }
+
+        const userSession = request.session.user;
+        const userEmail = userSession.userMail;
+
+        const userCart = await cartModel.findOne({ cart_owner: userEmail });
+
+        if (!userCart) {
+          const newCart = {
+            cart_owner: userEmail,
+            cartList: {
+              productID,
+              productName,
+              productImage,
+              productPrice,
+              Qty,
+            },
+          };
+
+          const cart = new cartModel(newCart);
+          const savedCard = await cart.save();
+
+          return response
+            .status(201)
+            .json({ msg: "Cart Item successfully added" });
+        }
+
+        const isProductDuplicate = userCart.cartList.find(
+          (item) => item.productID === productID
+        );
+        const cartItem = {
+          productID,
+          productName,
+          productImage,
+          productPrice,
+          Qty,
+        };
+        if (!isProductDuplicate) {
+          userCart.cartList = [cartItem, ...userCart.cartList];
+          const updatedDoc = await cartModel.findOneAndUpdate(
+            { cart_owner: userEmail },
+            userCart,
+            { new: true }
+          );
+          return response.status(201).json({ msg: "Item added to cart" });
+        }
+
+        const updatedCart = userCart.cartList.map((item) =>
+          item.productID === productID ? cartItem : item
+        );
+
+        userCart.cartList = updatedCart;
+
+        const updatedDoc = await cartModel.findOneAndUpdate(
+          { cart_owner: userEmail },
+          userCart,
+          {
+            new: true,
+          }
+        );
+        return response.status(204).json({ msg: "Item added to cart" });
       });
     } catch (error) {
       return response.status(500, {
@@ -39,4 +99,77 @@ class CartController {
       });
     }
   }
+
+  DeleteCartItem(request, response) {
+    const form = new Formidable.IncomingForm();
+
+    try {
+      form.parse(request, async (error, fields, files) => {
+        if (error) {
+          return response.status(500).json({
+            msg:
+              "Network Error: Failed to remove item from cart try again later",
+          });
+        }
+
+        const { productID } = fields;
+
+        if (!productID) {
+          return response.status(400).json({ msg: "Product ID required" });
+        }
+
+        const userSession = request.session.user;
+        const userEmail = userSession.userMail;
+
+        const userCart = await cartModel.findOne({ cart_owner: userEmail });
+
+        if (!userCart) {
+          return response
+            .status(404)
+            .json({ msg: "Account does not have cart" });
+        }
+
+        userCart.cartList = userCart.cartList.filter(
+          (item) => item.productID !== productID
+        );
+
+        const updatedDoc = await Cart.findOneAndUpdate(
+          { owner: userEmail },
+          existingCartOwner,
+          {
+            new: true,
+          }
+        );
+
+        return response.status(200).json({ msg: "Item removed successfully" });
+      });
+    } catch (error) {
+      return response.status(500).json({
+        msg: "Network Error: Failed to remove item from cart try again later",
+      });
+    }
+  }
+
+  async GetUserCart(request, response) {
+    const userSession = request.session.user;
+    const userEmail = userSession.userMail;
+
+    try {
+      const cart = await cartModel.findOne({ cart_owner: userEmail });
+
+      if (!cart) {
+        return response
+          .status(404)
+          .json({ msg: "Account does not have cart." });
+      }
+
+      return response.status(200).json(cart);
+    } catch (error) {
+      return response.status(500).json({
+        msg: "Network Error: Failed to get user cart try again later",
+      });
+    }
+  }
 }
+
+export default CartController;
