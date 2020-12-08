@@ -27,7 +27,8 @@ const ProductDetails = () => {
     Qty
   ) => {
     const url = "http://localhost:5000/api/add-to-cart";
-    const production_url = "/api/add-to-cart";
+    const production_url =
+      "https://hlongwane-botique.herokuapp.com/api/add-to-cart";
     const form_data = new FormData();
     form_data.append("productID", productID);
     form_data.append("productName", productName);

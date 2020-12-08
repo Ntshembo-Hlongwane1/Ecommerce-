@@ -7,7 +7,7 @@ import {
 
 const ProductListFetch = (productCategory) => async (dispatch) => {
   const url = `http://localhost:5000/api/fetch-products/${productCategory}`;
-  const production_url = `/api/fetch-products/${productCategory}`;
+  const production_url = `https://hlongwane-botique.herokuapp.com/api/fetch-products/${productCategory}`;
 
   try {
     dispatch({ type: PRODUCT_FETCH_REQUEST });

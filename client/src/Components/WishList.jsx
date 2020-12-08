@@ -34,7 +34,8 @@ const WishList = () => {
 
   const RemoveFromWishList = async (productID) => {
     const url = "http://localhost:5000/api/remove-wishlist-item";
-    const production_url = "/api/remove-wishlist-item";
+    const production_url =
+      "https://hlongwane-botique.herokuapp.com/api/remove-wishlist-item";
     const form_data = new FormData();
     form_data.append("productID", productID);
 

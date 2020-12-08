@@ -132,7 +132,8 @@ export default function SignIn() {
     e.preventDefault();
 
     const url = "http://localhost:5000/api/user-signin";
-    const production_url = "/api/user-signin";
+    const production_url =
+      "https://hlongwane-botique.herokuapp.com/api/user-signin";
 
     const form_data = new FormData();
     form_data.append("email", email);

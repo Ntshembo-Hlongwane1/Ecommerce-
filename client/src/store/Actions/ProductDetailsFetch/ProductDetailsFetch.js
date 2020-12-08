@@ -9,7 +9,7 @@ const productDetailsFetch = (productCategory, productID) => async (
   dispatch
 ) => {
   const url = `http://localhost:5000/api/fetch-product-details/${productCategory}/${productID}`;
-  const production_url = `/api/fetch-product-details/${productCategory}/${productID}`;
+  const production_url = `https://hlongwane-botique.herokuapp.com/api/fetch-product-details/${productCategory}/${productID}`;
 
   try {
     dispatch({ type: PRODUCT_DETAILS_FETCH_REQUEST });

@@ -100,7 +100,8 @@ const DesktopHeader = () => {
 
   const LogOut = async () => {
     const url = "http://localhost:5000/api/user-logout";
-    const production__url = "/api/user-logout";
+    const production__url =
+      "https://hlongwane-botique.herokuapp.com/api/user-logout";
     setIsOpen(!isOpen);
 
     try {
@@ -187,7 +188,7 @@ const DesktopHeader = () => {
                 </Link>
                 <div className="clothingCategories" onClick={DisplayCategories}>
                   <StorefrontIcon />
-                  <h4 className="Menu__text">Clothing Categories</h4>
+                  <h4 className="Menu__text"> Categories</h4>
                 </div>
                 <div className="clothesCategories">
                   {displayCategories ? (

@@ -7,7 +7,8 @@ import {
 
 const AuthStatusCheck = () => async (dispatch) => {
   const url = "http://localhost:5000/api/check-isUserLoggedin";
-  const production_url = "/api/check-isUserLoggedin";
+  const production_url =
+    "https://hlongwane-botique.herokuapp.com/api/check-isUserLoggedin";
   try {
     dispatch({ type: AUTH_STATUS_FETCH_REQUEST });
     const { data } = await axios.get(production_url, { withCredentials: true });

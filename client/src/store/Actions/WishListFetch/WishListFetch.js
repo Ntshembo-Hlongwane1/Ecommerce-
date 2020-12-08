@@ -7,7 +7,8 @@ import {
 
 const WishListFetch = () => async (dispatch) => {
   const url = "http://localhost:5000/api/retrive-wishlist";
-  const production_url = "/api/retrive-wishlist";
+  const production_url =
+    "https://hlongwane-botique.herokuapp.com/api/retrive-wishlist";
 
   try {
     dispatch({ type: WISH_LIST_FETCH_REQUEST });
