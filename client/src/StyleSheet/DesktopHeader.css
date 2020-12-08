@@ -161,7 +161,7 @@
   cursor: pointer;
 }
 
-.cart,
+.menuCart,
 .wishlist,
 .clothingCategories {
   display: none;

@@ -176,10 +176,12 @@ const DesktopHeader = () => {
                     <h4 className="Menu__text">My Cart</h4>
                   </div>
                 </Link>
-                <div className="wishlist " onClick={OpenMenu}>
-                  <FavoriteBorderIcon />
-                  <h4 className="Menu__text">My WishList</h4>
-                </div>
+                <Link to="/wishlist" className="Router__link sideBar-menuText">
+                  <div className="wishlist " onClick={OpenMenu}>
+                    <FavoriteBorderIcon />
+                    <h4 className="Menu__text">My WishList</h4>
+                  </div>
+                </Link>
                 <div className="clothingCategories" onClick={DisplayCategories}>
                   <StorefrontIcon />
                   <h4 className="Menu__text">Clothing Categories</h4>
