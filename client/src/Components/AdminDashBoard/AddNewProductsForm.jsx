@@ -81,13 +81,10 @@ const AddNewProductsForm = () => {
     form_data.append("picture", picture);
 
     const url = "http://localhost:5000/api/add-new-product";
-    const production_url =
-      "https://hlongwane-botique.herokuapp.com/api/add-new-product";
+    const production_url = "/api/add-new-product";
 
     try {
-      const response = await axios.post(production_url, form_data, {
-        withCredentials: true,
-      });
+      const response = await axios.post(production_url, form_data);
 
       const { status, data } = response;
       responseNotification(status, data.msg);

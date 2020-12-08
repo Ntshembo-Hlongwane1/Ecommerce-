@@ -27,8 +27,7 @@ const ProductDetails = () => {
     Qty
   ) => {
     const url = "http://localhost:5000/api/add-to-cart";
-    const production_url =
-      "https://hlongwane-botique.herokuapp.com/api/add-to-cart";
+    const production_url = "/api/add-to-cart";
     const form_data = new FormData();
     form_data.append("productID", productID);
     form_data.append("productName", productName);
@@ -36,9 +35,7 @@ const ProductDetails = () => {
     form_data.append("productImage", productImage);
     form_data.append("Qty", Qty);
     try {
-      const { data, status } = await axios.post(production_url, form_data, {
-        withCredentials: true,
-      });
+      const { data, status } = await axios.post(production_url, form_data);
 
       console.log(data, status);
     } catch (error) {

@@ -118,8 +118,7 @@ export default function SignUp() {
     e.preventDefault();
 
     const url = "http://localhost:5000/api/user-signup";
-    const production_url =
-      "https://hlongwane-botique.herokuapp.com/api/user-signup";
+    const production_url = "/api/user-signup";
 
     const form_data = new FormData();
     form_data.append("email", email);
@@ -127,9 +126,7 @@ export default function SignUp() {
     form_data.append("verifiedPassword", verifiedPassword);
 
     try {
-      const response = await axios.post(production_url, form_data, {
-        withCredentials: true,
-      });
+      const response = await axios.post(production_url, form_data);
       const { data, status } = response;
       responseNotification(status, data.msg);
     } catch (error) {

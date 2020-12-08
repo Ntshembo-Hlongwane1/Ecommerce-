@@ -9,11 +9,11 @@ const productDetailsFetch = (productCategory, productID) => async (
   dispatch
 ) => {
   const url = `http://localhost:5000/api/fetch-product-details/${productCategory}/${productID}`;
-  const production_url = `https://hlongwane-botique.herokuapp.com/api/fetch-product-details/${productCategory}/${productID}`;
+  const production_url = `/api/fetch-product-details/${productCategory}/${productID}`;
 
   try {
     dispatch({ type: PRODUCT_DETAILS_FETCH_REQUEST });
-    const { data } = await axios.get(production_url, { withCredentials: true });
+    const { data } = await axios.get(production_url);
     dispatch({ type: PRODUCT_DETAILS_FETCH_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_DETAILS_FETCH_FAIL, payload: error });

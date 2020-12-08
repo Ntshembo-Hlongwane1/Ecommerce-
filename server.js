@@ -19,12 +19,7 @@ const origin = {
 };
 
 //======================================================Middlewares=====================================================
-app.use(
-  cors({
-    origin: "https://hlongwane-botique.herokuapp.com/",
-    credentials: true,
-  })
-);
+app.use(cors());
 
 const mongoStore = MongoStore(expressSession);
 const mongoURI = process.env.mongoURI;
