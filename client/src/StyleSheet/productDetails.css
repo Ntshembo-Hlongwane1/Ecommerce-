@@ -6,6 +6,7 @@
 .details__info {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .info__left {
@@ -54,4 +55,14 @@
 }
 .productPicture:hover {
   transform: scale(1.07);
+}
+
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+  .info__right {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+  }
+  .info__left {
+    align-items: center;
+  }
 }

@@ -13,7 +13,7 @@
   margin-bottom: 2em;
   padding: 0.6em;
   transition: transform 0.4s;
-  margin-left: 1.5em;
+  margin-left: 1em;
 }
 
 .details:hover {
@@ -45,4 +45,13 @@
 .Error__message {
   text-align: center;
   margin-top: 5em;
+}
+
+@media screen and (min-width: 320px) and (max-width: 420px) {
+  .sneaker-details {
+    padding: 0;
+  }
+  .Loading__screen {
+    width: 95%;
+  }
 }

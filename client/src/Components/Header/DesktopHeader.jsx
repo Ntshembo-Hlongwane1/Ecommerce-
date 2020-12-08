@@ -23,6 +23,7 @@ import { Link, useHistory } from "react-router-dom";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const DesktopHeader = () => {
   const [isScrolling, setScrolling] = useState(false);
@@ -30,6 +31,7 @@ const DesktopHeader = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isDashMenuOpenend, setIsDashMenuOpened] = useState(false);
+  const [displayCategories, setDisplayCategories] = useState(false);
   const history = useHistory();
   const top = 0;
   const notifyState = localStorage.getItem("notify") || false;
@@ -90,6 +92,10 @@ const DesktopHeader = () => {
       default:
         break;
     }
+  };
+
+  const DisplayCategories = () => {
+    setDisplayCategories(!displayCategories);
   };
 
   const LogOut = async () => {
@@ -164,7 +170,56 @@ const DesktopHeader = () => {
                   <HomeIcon />
                   <h4 className="Menu__text">Home</h4>
                 </div>
-
+                <Link to="/cart" className="Router__link sideBar-menuText">
+                  <div className="menuCart" onClick={OpenMenu}>
+                    <ShoppingCartIcon />
+                    <h4 className="Menu__text">My Cart</h4>
+                  </div>
+                </Link>
+                <div className="wishlist " onClick={OpenMenu}>
+                  <FavoriteBorderIcon />
+                  <h4 className="Menu__text">My WishList</h4>
+                </div>
+                <div className="clothingCategories" onClick={DisplayCategories}>
+                  <StorefrontIcon />
+                  <h4 className="Menu__text">Clothing Categories</h4>
+                </div>
+                <div className="clothesCategories">
+                  {displayCategories ? (
+                    <div className="categories">
+                      <Link
+                        to="/products-hoodies"
+                        className="Router__link sideBar-menuText"
+                        onClick={OpenMenu}
+                      >
+                        <div className="Hoodies">
+                          <TurnedInIcon />
+                          <h4 className="Menu__text">Hoodies</h4>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/products-sneakers"
+                        className="Router__link sideBar-menuText"
+                        onClick={OpenMenu}
+                      >
+                        <div className="Sneakers">
+                          <TurnedInIcon />
+                          <h4 className="Menu__text">Sneakers</h4>
+                        </div>
+                      </Link>
+                      <Link
+                        to="/products-jeans"
+                        className="Router__link sideBar-menuText"
+                        onClick={OpenMenu}
+                      >
+                        <div className="Jeans">
+                          <TurnedInIcon />
+                          <h4 className="Menu__text">Jeans</h4>
+                        </div>
+                      </Link>
+                    </div>
+                  ) : null}
+                </div>
                 {authStatus && authStatus.auth_status ? (
                   <div className="Auth__statusItem" onClick={LogOut}>
                     <ExitToAppIcon />
@@ -211,6 +266,7 @@ const DesktopHeader = () => {
                     </div>
                   </div>
                 ) : null}
+
                 <input
                   type="text"
                   placeholder="Search"
@@ -233,6 +289,7 @@ const DesktopHeader = () => {
               <ShoppingCartIcon className="right__icons cart-icon" />
             </div>
           </Link>
+          <MenuIcon className="menuBar" onClick={OpenMenu} />
         </div>
       </div>
       <ReactNotifications className="Notification-Card" />

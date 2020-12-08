@@ -19,7 +19,7 @@ const Cart = () => {
           <img
             src={LoadingScreen}
             alt="Fetching cart..."
-            className="Loading__screen"
+            className="Loading__screen cart-loader"
           />
         ) : error ? (
           <h1 className="error__messgae">{`${error.message} :(`}</h1>

@@ -83,16 +83,20 @@ const Sneakers = () => {
         </h1>
       ) : (
         productList && (
-          <div className="Products__details">
+          <div className="Products__details sneaker-details">
             {productList.map((product) => {
               return (
-                <div className="details" key={product._id}>
-                  <div className="details__img">
+                <div className="details sneakers" key={product._id}>
+                  <div className="details__img ">
                     <Link
                       to={`/product-details/${category}/${product._id}`}
                       className="Router__link"
                     >
-                      <img src={product.picture} alt="Product" />
+                      <img
+                        src={product.picture}
+                        alt="Product"
+                        className="sneaker-imgs"
+                      />
                     </Link>
                     <FavoriteBorderIcon
                       className="wishlist__icon"
