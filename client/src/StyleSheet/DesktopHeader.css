@@ -182,7 +182,7 @@
   display: none !important;
 }
 
-@media screen and (min-width: 320px) and (max-width: 420px) {
+@media screen and (min-width: 320px) and (max-width: 800px) {
   .DesktopHeader__top {
     display: none;
   }
