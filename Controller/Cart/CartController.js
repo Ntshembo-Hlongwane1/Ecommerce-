@@ -37,16 +37,16 @@ class CartController {
         const userEmail = userSession.userMail;
 
         const userCart = await cartModel.findOne({ cart_owner: userEmail });
-
+        const qty = Qty === 0 ? 1 : Qty;
         if (!userCart) {
           const newCart = {
             cart_owner: userEmail,
-            cartList: {
+            cart: {
               productID,
               productName,
               productImage,
               productPrice,
-              Qty,
+              Qty: qty,
             },
           };
 
@@ -58,7 +58,7 @@ class CartController {
             .json({ msg: "Cart Item successfully added" });
         }
 
-        const isProductDuplicate = userCart.cartList.find(
+        const isProductDuplicate = userCart.cart.find(
           (item) => item.productID === productID
         );
         const cartItem = {
@@ -69,7 +69,7 @@ class CartController {
           Qty,
         };
         if (!isProductDuplicate) {
-          userCart.cartList = [cartItem, ...userCart.cartList];
+          userCart.cart = [cartItem, ...userCart.cart];
           const updatedDoc = await cartModel.findOneAndUpdate(
             { cart_owner: userEmail },
             userCart,
@@ -78,11 +78,11 @@ class CartController {
           return response.status(201).json({ msg: "Item added to cart" });
         }
 
-        const updatedCart = userCart.cartList.map((item) =>
+        const updatedCart = userCart.cart.map((item) =>
           item.productID === productID ? cartItem : item
         );
 
-        userCart.cartList = updatedCart;
+        userCart.cart = updatedCart;
 
         const updatedDoc = await cartModel.findOneAndUpdate(
           { cart_owner: userEmail },
@@ -129,7 +129,7 @@ class CartController {
             .json({ msg: "Account does not have cart" });
         }
 
-        userCart.cartList = userCart.cartList.filter(
+        userCart.cart = userCart.cart.filter(
           (item) => item.productID !== productID
         );
 

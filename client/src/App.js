@@ -14,6 +14,7 @@ import Sneakers from "./Components/ProductsPages/Sneakers";
 import Jeans from "./Components/ProductsPages/Jeans";
 import WishList from "./Components/WishList";
 import ProductDetails from "./Components/ProductDetails";
+import Cart from "./Components/Cart";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,23 +26,27 @@ const App = () => {
   return (
     <Router className="App">
       <Switch>
-        <Route path="/products-hoodies">
+        <Route path="/products-hoodies" exact={true}>
           <Header />
           <Hoodies />
         </Route>
-        <Route path="/product-details/:category/:id">
+        <Route path="/cart" exact={true}>
+          <Header />
+          <Cart />
+        </Route>
+        <Route path="/product-details/:category/:id" exact={true}>
           <Header />
           <ProductDetails />
         </Route>
-        <Route path="/wishlist">
+        <Route path="/wishlist" exact={true}>
           <Header />
           <WishList />
         </Route>
-        <Route path="/products-sneakers">
+        <Route path="/products-sneakers" exact={true}>
           <Header />
           <Sneakers />
         </Route>
-        <Route path="/products-jeans">
+        <Route path="/products-jeans" exact={true}>
           <Header />
           <Jeans />
         </Route>

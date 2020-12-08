@@ -228,9 +228,11 @@ const DesktopHeader = () => {
               <FiberManualRecordIcon className="notification-icon" />
             ) : null}
           </div>
-          <div className="right__cartIcon">
-            <ShoppingCartIcon className="right__icons cart-icon" />
-          </div>
+          <Link to="/cart" className="Router__link">
+            <div className="right__cartIcon">
+              <ShoppingCartIcon className="right__icons cart-icon" />
+            </div>
+          </Link>
         </div>
       </div>
       <ReactNotifications className="Notification-Card" />
