@@ -100,7 +100,7 @@ const DesktopHeader = () => {
 
   const LogOut = async () => {
     const url = "http://localhost:5000/api/user-logout";
-    const production__url = "http://localhost:5000/api/user-logout";
+    const production__url = "/api/user-logout";
     setIsOpen(!isOpen);
 
     try {

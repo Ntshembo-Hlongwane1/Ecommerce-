@@ -21,7 +21,7 @@ const origin = {
 //======================================================Middlewares=====================================================
 app.use(
   cors({
-    origin: process.env.NODE_ENV === "production" ? origin.prod : origin.dev,
+    origin: "https://hlongwane-botique.herokuapp.com",
     credentials: true,
   })
 );

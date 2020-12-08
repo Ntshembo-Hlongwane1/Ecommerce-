@@ -9,7 +9,7 @@ import Pusher from "pusher-js";
 import { Link } from "react-router-dom";
 
 const Sneakers = () => {
-  const productCategory = window.location.href.split("-")[1]; //First Letter lowercased
+  const productCategory = window.location.href.split("-")[2]; //First Letter lowercased
   const category =
     productCategory.charAt(0).toUpperCase() + productCategory.slice(1); // Uppercasing First Letter
   const dispatch = useDispatch();

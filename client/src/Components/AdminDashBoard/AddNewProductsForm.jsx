@@ -81,9 +81,10 @@ const AddNewProductsForm = () => {
     form_data.append("picture", picture);
 
     const url = "http://localhost:5000/api/add-new-product";
+    const production_url = "/api/add-new-product";
 
     try {
-      const response = await axios.post(url, form_data, {
+      const response = await axios.post(production_url, form_data, {
         withCredentials: true,
       });
 
