@@ -5,7 +5,7 @@ const DashBoard = () => {
   return (
     <div className="Dashboard">
       <div className="Dashboard__top">
-        <h2>WELCOME BACK</h2>
+        <h2 className="Dashboard__heading">WELCOME BACK</h2>
       </div>
       <div className="Dashboard__bottom">
         <div className="bottom__orders">
