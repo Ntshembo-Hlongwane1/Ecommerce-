@@ -34,6 +34,7 @@ class CartController {
         }
 
         const userSession = request.session.user;
+
         const userEmail = userSession.userMail;
 
         const userCart = await cartModel.findOne({ cart_owner: userEmail });
@@ -133,9 +134,9 @@ class CartController {
           (item) => item.productID !== productID
         );
 
-        const updatedDoc = await Cart.findOneAndUpdate(
-          { owner: userEmail },
-          existingCartOwner,
+        const updatedDoc = await cartModel.findOneAndUpdate(
+          { cart_owner: userEmail },
+          userCart,
           {
             new: true,
           }

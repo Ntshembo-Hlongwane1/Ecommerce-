@@ -8,12 +8,18 @@ import {
 const productDetailsFetch = (productCategory, productID) => async (
   dispatch
 ) => {
-  const url = `http://localhost:5000/api/fetch-product-details/${productCategory}/${productID}`;
-  const production_url = `/api/fetch-product-details/${productCategory}/${productID}`;
+  const baseURL = {
+    dev: `http://localhost:5000/api/fetch-product-details/${productCategory}/${productID}`,
+    prod: `/api/fetch-product-details/${productCategory}/${productID}`,
+  };
+  const url =
+    process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
 
   try {
     dispatch({ type: PRODUCT_DETAILS_FETCH_REQUEST });
-    const { data } = await axios.get(production_url);
+    const { data } = await axios.get(url, {
+      withCredentials: true,
+    });
     dispatch({ type: PRODUCT_DETAILS_FETCH_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_DETAILS_FETCH_FAIL, payload: error });

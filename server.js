@@ -19,7 +19,12 @@ const origin = {
 };
 
 //======================================================Middlewares=====================================================
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.NODE_ENV === "production" ? origin.prod : origin.dev,
+    credentials: true,
+  })
+);
 
 const mongoStore = MongoStore(expressSession);
 const mongoURI = process.env.mongoURI;

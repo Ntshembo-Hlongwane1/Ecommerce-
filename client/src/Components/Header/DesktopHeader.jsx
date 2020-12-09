@@ -99,13 +99,17 @@ const DesktopHeader = () => {
   };
 
   const LogOut = async () => {
-    const url = "http://localhost:5000/api/user-logout";
-    const production__url =
-      "https://hlongwane-botique.herokuapp.com/api/user-logout";
+    const baseURL = {
+      dev: "http://localhost:5000/api/user-logout",
+      prod: "https://hlongwane-botique.herokuapp.com/api/user-logout",
+    };
+
+    const url =
+      process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
     setIsOpen(!isOpen);
 
     try {
-      const response = await axios.get(production__url, {
+      const response = await axios.get(url, {
         withCredentials: true,
       });
       const { data, status } = response;

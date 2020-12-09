@@ -6,11 +6,17 @@ import {
 } from "./actions";
 
 const AuthStatusCheck = () => async (dispatch) => {
-  const url = "http://localhost:5000/api/check-isUserLoggedin";
-  const production_url = "/api/check-isUserLoggedin";
+  const baseURL = {
+    dev: "http://localhost:5000/api/check-isUserLoggedin",
+    prod: "/api/check-isUserLoggedin",
+  };
+  const url =
+    process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
   try {
     dispatch({ type: AUTH_STATUS_FETCH_REQUEST });
-    const { data } = await axios.get(production_url);
+    const { data } = await axios.get(url, {
+      withCredentials: true,
+    });
     console.log(data);
     dispatch({ type: AUTH_STATUS_FETCH_SUCCESS, payload: data });
   } catch (error) {

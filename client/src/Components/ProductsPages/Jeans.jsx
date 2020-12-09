@@ -9,7 +9,7 @@ import Pusher from "pusher-js";
 import { Link } from "react-router-dom";
 
 const Jeans = () => {
-  const productCategory = window.location.href.split("-")[2]; //First Letter lowercased
+  const productCategory = window.location.href.split("-")[1]; //First Letter lowercased
   const category =
     productCategory.charAt(0).toUpperCase() + productCategory.slice(1); // Uppercasing First Letter
   const dispatch = useDispatch();
@@ -24,8 +24,13 @@ const Jeans = () => {
     productPrice,
     imageURL
   ) => {
-    const url = "http://localhost:5000/api/add-wishlist-item";
-    const production__url = "/api/add-wishlist-item";
+    const baseURL = {
+      dev: "http://localhost:5000/api/add-wishlist-item",
+      prod: "/api/add-wishlist-item",
+    };
+
+    const url =
+      process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
 
     const form_data = new FormData();
     form_data.append("imageURL", imageURL);
@@ -34,7 +39,9 @@ const Jeans = () => {
     form_data.append("productID", productID);
 
     try {
-      const response = await axios.post(production__url, form_data);
+      const response = await axios.post(url, form_data, {
+        withCredentials: true,
+      });
 
       console.log(response);
     } catch (error) {

@@ -4,6 +4,7 @@ import productDetailsFetch from "../store/Actions/ProductDetailsFetch/ProductDet
 import LoadingScreen from "../images/screenLoader.gif";
 import "../StyleSheet/productDetails.css";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const ProductDetails = () => {
   const productCategory = currentWindow.split("/")[4];
   const productID = currentWindow.split("/")[5];
   const [Qty, setQty] = useState(1);
+  const history = useHistory();
   const { loading, error, productDetails } = useSelector(
     (state) => state.productDetail
   );
@@ -26,8 +28,14 @@ const ProductDetails = () => {
     productImage,
     Qty
   ) => {
-    const url = "http://localhost:5000/api/add-to-cart";
-    const production_url = "/api/add-to-cart";
+    const baseURL = {
+      dev: "http://localhost:5000/api/add-to-cart",
+      prod: "/api/add-to-cart",
+    };
+
+    const url =
+      process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
+
     const form_data = new FormData();
     form_data.append("productID", productID);
     form_data.append("productName", productName);
@@ -35,7 +43,13 @@ const ProductDetails = () => {
     form_data.append("productImage", productImage);
     form_data.append("Qty", Qty);
     try {
-      const { data, status } = await axios.post(production_url, form_data);
+      const { data, status } = await axios.post(url, form_data, {
+        withCredentials: true,
+      });
+
+      if (status === 201 || status === 200) {
+        history.push("/cart");
+      }
 
       console.log(data, status);
     } catch (error) {

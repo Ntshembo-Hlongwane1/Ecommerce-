@@ -33,13 +33,20 @@ const WishList = () => {
   }, [dispatch]);
 
   const RemoveFromWishList = async (productID) => {
-    const url = "http://localhost:5000/api/remove-wishlist-item";
-    const production_url = "/api/remove-wishlist-item";
+    const baseURL = {
+      dev: "http://localhost:5000/api/remove-wishlist-item",
+      prod: "/api/remove-wishlist-item",
+    };
+
+    const url =
+      process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
     const form_data = new FormData();
     form_data.append("productID", productID);
 
     try {
-      const response = await axios.post(production_url, form_data);
+      const response = await axios.post(url, form_data, {
+        withCredentials: true,
+      });
     } catch (error) {
       console.error(error);
     }

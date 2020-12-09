@@ -80,11 +80,18 @@ const AddNewProductsForm = () => {
     form_data.append("stock_count", stock_count);
     form_data.append("picture", picture);
 
-    const url = "http://localhost:5000/api/add-new-product";
-    const production_url = "/api/add-new-product";
+    const baseURL = {
+      dev: "http://localhost:5000/api/add-new-product",
+      prod: "/api/add-new-product",
+    };
+
+    const url =
+      process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
 
     try {
-      const response = await axios.post(production_url, form_data);
+      const response = await axios.post(url, form_data, {
+        withCredentials: true,
+      });
 
       const { status, data } = response;
       responseNotification(status, data.msg);

@@ -131,15 +131,21 @@ export default function SignIn() {
   const LoginUser = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:5000/api/user-signin";
-    const production_url = "/api/user-signin";
+    const baseURL = {
+      dev: "http://localhost:5000/api/user-signin",
+      prod: "/api/user-signin",
+    };
+    const url =
+      process.env.NODE_ENV === "production" ? baseURL.prod : baseURL.dev;
 
     const form_data = new FormData();
     form_data.append("email", email);
     form_data.append("password", password);
 
     try {
-      const response = await axios.post(production_url, form_data);
+      const response = await axios.post(url, form_data, {
+        withCredentials: true,
+      });
 
       const { status, data } = response;
 
