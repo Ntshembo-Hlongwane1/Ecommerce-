@@ -15,6 +15,7 @@ import Jeans from "./Components/ProductsPages/Jeans";
 import WishList from "./Components/WishList";
 import ProductDetails from "./Components/ProductDetails";
 import Cart from "./Components/Cart";
+import PageNotFound from "./Components/PageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,9 @@ const App = () => {
         </Route>
         <Route path="/" exact={true}>
           <Home />
+        </Route>
+        <Route path="">
+          <PageNotFound />
         </Route>
       </Switch>
     </Router>
